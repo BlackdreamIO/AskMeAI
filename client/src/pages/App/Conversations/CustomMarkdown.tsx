@@ -1,6 +1,6 @@
 import MarkdownIt from 'markdown-it';
 import Prism from 'prismjs';
-import { Highlight, themes } from 'prism-react-renderer';
+//import { Highlight, themes } from 'prism-react-renderer';
 import 'prismjs/themes/prism-okaidia.css'; // Import a Prism theme with improved appearance
 //import 'highlight.js/styles/github.css'; // Import a style for highlight.js
 //import hljs from 'highlight.js/lib/core'; // Import only the core functionality of highlight.js
@@ -24,12 +24,13 @@ const md = new MarkdownIt({
   }
 });
 
-const CustomMarkdown = ({ content }) => {
+const CustomMarkdown = ({ content } : { content : any }) => {
   // Render the Markdown content with MarkdownIt
   const renderedContent = md.render(content);
 
+  /*
   // A function to render code blocks using prism-react-renderer
-  const renderCodeBlock = (code, language) => (
+  const renderCodeBlock = (code : string, language : any) => (
     <Highlight
       theme={themes.okaidia}
       code={code.trim()}
@@ -48,6 +49,7 @@ const CustomMarkdown = ({ content }) => {
       )}
     </Highlight>
   );
+  */
 
   // Render the replaced content
   return (

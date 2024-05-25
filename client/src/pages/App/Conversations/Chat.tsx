@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Bot, CircleUser, Clipboard, Download, RefreshCcwDot, Volume1 } from "lucide-react"
 
-import { AnimatePresence, motion } from "framer-motion";
+//import { AnimatePresence, motion } from "framer-motion";
 import CustomMarkdown from "./CustomMarkdown";
 
 type ChatProps = {
@@ -13,21 +13,21 @@ type ChatProps = {
 export const Chat = (props : ChatProps) => {
     const { id, message, user } = props;
 
-    const [showFullMessage, setShowFullMessage] = useState(false);
+    // const [showFullMessage, setShowFullMessage] = useState(false);
 
-    // Split the message into individual characters
-    const characters = message.split("");
+    // // Split the message into individual characters
+    // const characters = message.split("");
 
-    useEffect(() => {
-        // Set a timeout to display the full message after the animations
-        const totalAnimationTime = characters.length * 0.05 * 1000; // Adjust the timing as needed
-        const timeout = setTimeout(() => {
-            setShowFullMessage(true);
-        }, totalAnimationTime);
+    // useEffect(() => {
+    //     // Set a timeout to display the full message after the animations
+    //     const totalAnimationTime = characters.length * 0.05 * 1000; // Adjust the timing as needed
+    //     const timeout = setTimeout(() => {
+    //         setShowFullMessage(true);
+    //     }, totalAnimationTime);
 
-        // Clear timeout on component unmount
-        return () => clearTimeout(timeout);
-    }, [message, characters.length]);
+    //     // Clear timeout on component unmount
+    //     return () => clearTimeout(timeout);
+    // }, [message, characters.length]);
 
 
     const [selectedText, setSelectedText] = useState('');

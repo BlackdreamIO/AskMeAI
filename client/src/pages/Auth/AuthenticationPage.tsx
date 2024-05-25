@@ -5,8 +5,8 @@ enum AuthMode {
     SignUp = "Sign Up",
 }
 
-export const AuthenticationPage = forwardRef<HTMLDivElement>((props, ref) => {
-    
+export const AuthenticationPage = forwardRef<HTMLDivElement>((_props, ref) => {
+
     const [authMode, setAuthMode] = useState<AuthMode>(AuthMode.LogIn);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -25,6 +25,8 @@ export const AuthenticationPage = forwardRef<HTMLDivElement>((props, ref) => {
             password : e.target.password.value
         })
         console.log(formData);
+        setError('working');
+        setIsLoading(false);
     }
 
     return (

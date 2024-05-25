@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { SuggestedPrompts } from "./Header/SuggestedPrompts";
+//import { SuggestedPrompts } from "./Header/SuggestedPrompts";
 import { UserPrompt } from "./Prompt/Prompt";
 import Conversations from "./Conversations/Conversations";
 

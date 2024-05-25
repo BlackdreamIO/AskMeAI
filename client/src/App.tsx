@@ -21,14 +21,14 @@ export default function App()
 
     return (
         <div className="w-full cursor-default scroll-smooth">
-            {/* <StartPage onStart={() => setShowAuthPage(true)} /> */}
-            {/* {
+            <StartPage onStart={() => setShowAuthPage(true)} />
+            {
                 showAuthPage && (
                     <AuthenticationPage
                         ref={AuthenticationPageRef}
                     />
                 )
-            } */}
+            }
             <Layout />
         </div>
     )
