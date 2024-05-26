@@ -15,7 +15,7 @@ export const Chat = (props : ChatProps) => {
     const { id, message, user } = props;
 
     const [selectedText, setSelectedText] = useState('');
-    const [isSpeaking, setIsSpeaking] = useState(false);
+    //const [isSpeaking, setIsSpeaking] = useState(false);
     
     const handleMouseUp = () => {
         const selection = window.getSelection();
@@ -77,7 +77,7 @@ export const Chat = (props : ChatProps) => {
                             <button className="text-neutral-500 hover:text-green-400">
                                 <RefreshCcwDot />
                             </button>
-                            <button onClick={handleSpeakLoud} className={`text-neutral-500 ${ isSpeaking ? 'text-green-400' : 'hover:text-green-400'}`}>
+                            <button onClick={handleSpeakLoud} className={`text-neutral-500 ${ 1+1 == 4 ? 'text-green-400' : 'hover:text-green-400'}`}>
                                 <Volume1 size={'2rem'} />
                             </button>
                         </ul>

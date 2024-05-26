@@ -30,8 +30,6 @@ const ChatContextProvider = ({ children }: { children: ReactNode }) => {
     const [conversations, setConversations] = useState<Chat[]>(GetPreviousChat());
     const [disableUserPrompt, setDisableUserPrompt] = useState(false);
 
-    const [currentAudioSound, setCurrentAudioSound] = useState(SoundEffects.Submit2Sound);
-
     const [currentUUID, setCurrentUUID] = useState('');
     const [gptChat, setGptChat] = useState('');
 
@@ -44,19 +42,20 @@ const ChatContextProvider = ({ children }: { children: ReactNode }) => {
                 await audioRef.current?.play();
             }
             else {
-                audioRef.current?.setAttribute('src', currentAudioSound);
+                audioRef.current?.setAttribute('src', SoundEffects.Submit2Sound);
                 audioRef.current?.play();
             }
         } catch (error) {
             console.error('Error playing sound:', error);
         }
     };
-    const StopSound = () => {
-        if (audioRef.current) {
-            audioRef.current.pause();
-            audioRef.current.currentTime = 0;
-        }
-    };
+    
+    // const StopSound = () => {
+    //     if (audioRef.current) {
+    //         audioRef.current.pause();
+    //         audioRef.current.currentTime = 0;
+    //     }
+    // };
 
     const handleNewPrompt = async (prompt: string) => {
         const newUSERUUID = window.crypto.randomUUID();
