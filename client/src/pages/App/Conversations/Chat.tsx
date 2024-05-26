@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Bot, CircleUser, Clipboard, Download, RefreshCcwDot, Volume1 } from "lucide-react"
+import { marked } from 'marked';
 
 //import { AnimatePresence, motion } from "framer-motion";
 import CustomMarkdown from "./CustomMarkdown";
@@ -13,24 +14,8 @@ type ChatProps = {
 export const Chat = (props : ChatProps) => {
     const { id, message, user } = props;
 
-    // const [showFullMessage, setShowFullMessage] = useState(false);
-
-    // // Split the message into individual characters
-    // const characters = message.split("");
-
-    // useEffect(() => {
-    //     // Set a timeout to display the full message after the animations
-    //     const totalAnimationTime = characters.length * 0.05 * 1000; // Adjust the timing as needed
-    //     const timeout = setTimeout(() => {
-    //         setShowFullMessage(true);
-    //     }, totalAnimationTime);
-
-    //     // Clear timeout on component unmount
-    //     return () => clearTimeout(timeout);
-    // }, [message, characters.length]);
-
-
     const [selectedText, setSelectedText] = useState('');
+    const [isSpeaking, setIsSpeaking] = useState(false);
     
     const handleMouseUp = () => {
         const selection = window.getSelection();
@@ -46,17 +31,31 @@ export const Chat = (props : ChatProps) => {
         }
     }
 
-    function SpeechSynthesis(text : string) {
+    async function SpeechSynthesis(text : string) {
+        /*
+        // Remove markdown formatting
+        const plainText = (await marked.parse(text)).replace(/(<([^>]+)>)/gi, "");
+    
         // Create a SpeechSynthesisUtterance
-        const utterance = new SpeechSynthesisUtterance(text);
-      
+        const utterance = new SpeechSynthesisUtterance(plainText);
+    
         // Select a voice
         const voices = speechSynthesis.getVoices();
+        console.log(voices);
         utterance.voice = voices[3]; // Choose a specific voice
-      
+    
         // Speak the text
-        speechSynthesis.speak(utterance);
-        //speechSynthesis.
+        setIsSpeaking(!isSpeaking);
+        !isSpeaking ? speechSynthesis.cancel() : speechSynthesis.speak(utterance);
+        */
+        const cleanedText = text.replace(/(\*|`|_|\[|\]|\(|\))/g, ' '); // Remove Markdown syntax
+        const plainText = (await marked.parse(cleanedText)).replace(/(<([^>]+)>)/gi, ' ');
+        if (window.responsiveVoice) {
+            window.responsiveVoice.getVoices();
+            window.responsiveVoice.speak(plainText, 'UK English Male');
+        } else {
+          console.error('ResponsiveVoice library not loaded');
+        }
     }
 
     return (
@@ -66,29 +65,6 @@ export const Chat = (props : ChatProps) => {
                     <div className="space-y-4">
                         <Bot size={'2rem'} />
                         <div className="w-full bg-neutral-900 p-4 flex justify-start items-center rounded-lg border border-neutral-800">
-                        {/* {!showFullMessage ? (
-                characters.map((char, index) => (
-                    <motion.span
-                        key={index}
-                        className="character"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: index * 0.05 }} // Adjust delay as needed
-                    >
-                        {char}
-                    </motion.span>
-                ))
-            ) : (
-                <motion.h1
-                    className="font-medium text-lg"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    {message}
-                </motion.h1>
-            )} */}
-                        {/* <h1 className="font-medium text-lg">{message}</h1> */}
                         <CustomMarkdown content={message} />
                         </div>
                         <ul className="ml-5 flex flex-row space-x-5 w-full">
@@ -101,7 +77,7 @@ export const Chat = (props : ChatProps) => {
                             <button className="text-neutral-500 hover:text-green-400">
                                 <RefreshCcwDot />
                             </button>
-                            <button onClick={handleSpeakLoud} className="text-neutral-500 hover:text-green-400">
+                            <button onClick={handleSpeakLoud} className={`text-neutral-500 ${ isSpeaking ? 'text-green-400' : 'hover:text-green-400'}`}>
                                 <Volume1 size={'2rem'} />
                             </button>
                         </ul>

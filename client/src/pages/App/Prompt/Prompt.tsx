@@ -22,8 +22,8 @@ export const UserPrompt = (props : UserPromptProps) =>{
                 disabled={disablePromt}
                 onKeyDown={(e) => {
                     if(e.key == 'Enter') {
-                        ///onSubmit(promt);
-                        ///setPromt('');
+                        onSubmit(promt);
+                        setPromt('');
                     }
                 }}
             />

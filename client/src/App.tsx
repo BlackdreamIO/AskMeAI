@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import StartPage from "./pages/Start/StartPage";
 import AuthenticationPage from "./pages/Auth/AuthenticationPage";
 import Layout from "./pages/App/Layout";
+import { ChatContextProvider } from "./context/ChatContextAPI";
 
 export default function App() 
 {
@@ -29,7 +30,9 @@ export default function App()
                     />
                 )
             }
-            <Layout />
+            <ChatContextProvider>
+                <Layout />
+            </ChatContextProvider>
         </div>
     )
 }
