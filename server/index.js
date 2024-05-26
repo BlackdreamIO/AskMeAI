@@ -23,6 +23,8 @@ app.get('/api/gem/:prompt', async (req, res) => {
     {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
         const result = await model.generateContentStream(req.params.prompt);
+        const { totalTokens } = await model.countTokens(req.params.prompt);
+        console.log(`totalTokens : ${totalTokens}`);
 
         // Set headers to keep the connection alive and indicate that the response is streamed
         res.setHeader('Content-Type', 'text/plain');

@@ -72,7 +72,7 @@ export default function Layout()
 
     async function GetStreamingChat({prompt} : { prompt : string }) 
     {
-        await fetch(`http://localhost:5000/api/gem/${encodeURIComponent(prompt)}`)
+        await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/gem/${encodeURIComponent(prompt)}`)
             .then((response : any) => {
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder();
