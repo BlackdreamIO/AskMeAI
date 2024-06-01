@@ -81,7 +81,11 @@ const ChatContextProvider = ({ children }: { children: ReactNode }) => {
 
     const GetStreamingChat = async ({ prompt }: { prompt: string }) => {
         try {
-            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/gem/${encodeURIComponent(prompt)}`)
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/gem/${encodeURIComponent(prompt)}`, {
+                headers : {
+                    'Access-Control-Allow-Origin': import.meta.env.VITE_BACKEND_URL
+                }
+            })
                 .then((response : any) => {
                     PlaySound(SoundEffects.TypinhSound);
                     const reader = response.body.getReader();

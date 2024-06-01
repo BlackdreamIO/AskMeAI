@@ -30,6 +30,7 @@ app.get('/api/gem/:prompt', async (req, res) => {
         res.setHeader('Content-Type', 'text/plain');
         res.setHeader('Transfer-Encoding', 'chunked');
         res.setHeader('Cache-Control', 'no-cache');
+        res.header("Access-Control-Allow-Origin", process.env.FRONTEND_ORIGIN);
 
         // Stream the response to the client
         for await (const chunk of result.stream) {
