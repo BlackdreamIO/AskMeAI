@@ -1,10 +1,12 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const express = require('express');
 const cors = require('cors');
+const dotEnv = require('dotenv').config();
 
 const port = process.env.PORT || 5000;
 
-const genAI = new GoogleGenerativeAI("AIzaSyBVdu6MQFHOY_OPGwV-y1GZ9G9Y2P7QF8o");
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API);
+console.log(process.env.GOOGLE_GEMINI_API);
 const app = express();
 
 app.use(cors());
@@ -34,10 +36,12 @@ app.get('/api/gem/:prompt', async (req, res) => {
         }
 
         // End the response when the stream is finished
-        res.end();   
+        res.end();
     } 
     catch (error) {
-        res.status('status : 500 internal server error')
+        res.write(error);
+        res.status('status : 500 internal server error');
+        res.end();
     }
 });
 
