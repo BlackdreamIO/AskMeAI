@@ -30,7 +30,15 @@ app.get('/api/gem/:prompt', async (req, res) => {
         res.setHeader('Content-Type', 'text/plain');
         res.setHeader('Transfer-Encoding', 'chunked');
         res.setHeader('Cache-Control', 'no-cache');
-        res.header("Access-Control-Allow-Origin", process.env.FRONTEND_ORIGIN);
+
+        res.setHeader('Access-Control-Allow-Credentials', true);
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+        res.setHeader(
+          'Access-Control-Allow-Headers',
+          'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+        )
+        //res.header("Access-Control-Allow-Origin", process.env.FRONTEND_ORIGIN);
 
         // Stream the response to the client
         for await (const chunk of result.stream) {
