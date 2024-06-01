@@ -9,7 +9,9 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API);
 console.log(process.env.GOOGLE_GEMINI_API);
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin : process.env.FRONTEND_ORIGIN
+}));
 
 app.get('/api', (req, res) => {
     res.send({status : 'YOUR ON HOME PAGE'});
