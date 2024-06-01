@@ -1,12 +1,8 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv')
-dotenv.config()
 
-
-const port = 5000;
-
+const port = process.env.PORT || 5000;
 
 const genAI = new GoogleGenerativeAI("AIzaSyBVdu6MQFHOY_OPGwV-y1GZ9G9Y2P7QF8o");
 const app = express();

@@ -15,7 +15,7 @@ export const Chat = (props : ChatProps) => {
     const { id, message, user } = props;
 
     const [selectedText, setSelectedText] = useState('');
-    //const [isSpeaking, setIsSpeaking] = useState(false);
+    const [isSpeaking, setIsSpeaking] = useState(false);
     
     const handleMouseUp = () => {
         const selection = window.getSelection();
@@ -32,9 +32,12 @@ export const Chat = (props : ChatProps) => {
     }
 
     async function SpeechSynthesis(text : string) {
-        /*
+        
         // Remove markdown formatting
-        const plainText = (await marked.parse(text)).replace(/(<([^>]+)>)/gi, "");
+        const unwantedChars = /["',.*()#&^%$@!39;]/g;
+        const plainText = (await marked.parse(text)).replace(unwantedChars, "");
+        console.log(plainText);
+        
     
         // Create a SpeechSynthesisUtterance
         const utterance = new SpeechSynthesisUtterance(plainText);
@@ -47,15 +50,17 @@ export const Chat = (props : ChatProps) => {
         // Speak the text
         setIsSpeaking(!isSpeaking);
         !isSpeaking ? speechSynthesis.cancel() : speechSynthesis.speak(utterance);
-        */
-        const cleanedText = text.replace(/(\*|`|_|\[|\]|\(|\))/g, ' '); // Remove Markdown syntax
-        const plainText = (await marked.parse(cleanedText)).replace(/(<([^>]+)>)/gi, ' ');
+        
+       /*
+        const cleanedText = text.replace(/(\*|`|_|\[|\]|\(|\))/g, ''); // Remove Markdown syntax
+        const plainText = (await marked.parse(text)).replace(/(<([^>]+)>)/gi, '');
         if (window.responsiveVoice) {
             window.responsiveVoice.getVoices();
             window.responsiveVoice.speak(plainText, 'UK English Male');
         } else {
           console.error('ResponsiveVoice library not loaded');
         }
+        */
     }
 
     return (
