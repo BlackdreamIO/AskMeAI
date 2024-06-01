@@ -10,7 +10,7 @@ console.log(process.env.GOOGLE_GEMINI_API);
 const app = express();
 
 app.use(cors({
-    origin : process.env.FRONTEND_ORIGIN
+    origin : '*'
 }));
 
 app.get('/api', (req, res) => {

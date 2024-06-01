@@ -83,7 +83,7 @@ const ChatContextProvider = ({ children }: { children: ReactNode }) => {
         try {
             await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/gem/${encodeURIComponent(prompt)}`, {
                 headers : {
-                    'Access-Control-Allow-Origin': import.meta.env.VITE_BACKEND_URL
+                    'Access-Control-Allow-Origin': '*'
                 }
             })
                 .then((response : any) => {
